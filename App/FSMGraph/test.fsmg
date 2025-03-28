@@ -1,0 +1,125 @@
+[
+    [
+        "node",
+        {
+            "index": 0,
+            "position": [
+                761.0,
+                391.0
+            ],
+            "typeName": "FSMGraphAttackActionNode"
+        }
+    ],
+    [
+        "node",
+        {
+            "index": 1,
+            "position": [
+                951.0,
+                389.0
+            ],
+            "typeName": "FSMGraphChaseActionNode"
+        }
+    ],
+    [
+        "node",
+        {
+            "index": 2,
+            "patrolRadius": 96.0,
+            "patrolTime": 2.0,
+            "position": [
+                1143.0,
+                391.0
+            ],
+            "typeName": "FSMGraphPatrolActionNode"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 0,
+            "maxDistance": 80.0,
+            "minDistance": 0.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 1,
+            "maxDistance": 160.0,
+            "minDistance": 80.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 2,
+            "maxDistance": 10000.0,
+            "minDistance": 160.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 3,
+            "maxDistance": 160.0,
+            "minDistance": 80.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 1,
+            "fromNodeIndex": 0,
+            "index": 0,
+            "toNodeIndex": 1
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 0,
+            "fromNodeIndex": 1,
+            "index": 1,
+            "toNodeIndex": 0
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 2,
+            "fromNodeIndex": 1,
+            "index": 2,
+            "toNodeIndex": 2
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 3,
+            "fromNodeIndex": 2,
+            "index": 3,
+            "toNodeIndex": 1
+        }
+    ]
+]

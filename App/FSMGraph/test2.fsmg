@@ -1,0 +1,194 @@
+[
+    [
+        "node",
+        {
+            "index": 0,
+            "position": [
+                900.0000610351563,
+                160.00001525878906
+            ],
+            "typeName": "FSMGraphWaitActionNode",
+            "waitTime": 2.0
+        }
+    ],
+    [
+        "node",
+        {
+            "index": 1,
+            "patrolRadius": 96.0,
+            "patrolTime": 2.0,
+            "position": [
+                902.0,
+                320.0
+            ],
+            "typeName": "FSMGraphPatrolActionNode"
+        }
+    ],
+    [
+        "node",
+        {
+            "index": 2,
+            "position": [
+                1083.3333740234375,
+                335.3333435058594
+            ],
+            "typeName": "FSMGraphSetAroundIndexActionNode"
+        }
+    ],
+    [
+        "node",
+        {
+            "index": 3,
+            "position": [
+                1080.0,
+                483.3333435058594
+            ],
+            "typeName": "FSMGraphChaseAroundActionNode"
+        }
+    ],
+    [
+        "node",
+        {
+            "index": 4,
+            "position": [
+                780.0,
+                484.0000305175781
+            ],
+            "typeName": "FSMGraphAttackActionNode"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphActionDoneDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 1,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphActionDoneDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 2,
+            "maxDistance": 10000.0,
+            "minDistance": 160.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 3,
+            "maxDistance": 80.0,
+            "minDistance": 0.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 4,
+            "maxDistance": 160.0,
+            "minDistance": 80.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "decision",
+        {
+            "index": 5,
+            "maxDistance": 160.0,
+            "minDistance": 80.0,
+            "position": [
+                1445.0,
+                330.0
+            ],
+            "typeName": "FSMGraphDistanceDecision"
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 0,
+            "fromNodeIndex": 0,
+            "index": 0,
+            "priority": 0,
+            "toNodeIndex": 1
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 5,
+            "fromNodeIndex": 1,
+            "index": 1,
+            "priority": 0,
+            "toNodeIndex": 2
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 1,
+            "fromNodeIndex": 2,
+            "index": 2,
+            "priority": 0,
+            "toNodeIndex": 3
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 3,
+            "fromNodeIndex": 3,
+            "index": 3,
+            "priority": 2,
+            "toNodeIndex": 4
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 4,
+            "fromNodeIndex": 4,
+            "index": 4,
+            "priority": 0,
+            "toNodeIndex": 3
+        }
+    ],
+    [
+        "edge",
+        {
+            "attachedDecisionIndex": 2,
+            "fromNodeIndex": 3,
+            "index": 5,
+            "priority": 1,
+            "toNodeIndex": 1
+        }
+    ]
+]
