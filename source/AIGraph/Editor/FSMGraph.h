@@ -120,6 +120,8 @@ private:
 	void attachDecisionToEdge();
 	/// @brief グラフをコンパイルしてデバッグを開始する
 	void compileGraphAndStartDebug();
+	/// @brief デバッグ停止
+	void stopDebug();
 	/// @brief FSMグラフを保存する
 	void saveFSMGraph();
 	/// @brief FSMグラフをロードする
@@ -149,19 +151,16 @@ private:
 	bool canAttachDecision_ = false;
 
 	FSMGraphNode* pFromNodeForCreate = nullptr;
-	FSMGraphNode* pToNodeForCreate = nullptr;
-
-	StateController* pCompiledController_ = nullptr;
+	FSMGraphNode* pToNodeForCreate = nullptr;	
 
 	Effect effect_;
 
 	//UI
 	RectF debugArea{ 5,100,575,550 };
 	Rect graphWindow{ 585, 100, 750, 550 };
-	Rect propertyWindow{ 1340, 100, 250, 550 };
+	Rect propertyWindow{ 1340, 100, 255, 550 };
 	FSMGraphAddNodePanel addNodePanel_;
 	FSMGraphAddDecisionPanel addDecisionPanel_;
-	//friend FSMGrapSelectEnemyPanel;
 	FSMGrapSelectEnemyPanel selectEnemyPanel_;
 	const Font font{ FontMethod::MSDF, 48 };
 	//saveload用
@@ -175,7 +174,7 @@ private:
 	ComponentFactoryManager* pCManager = ComponentFactoryManager::Get();
 	Setup setup;
 	Enemy* pCurrentEnemy_ = nullptr;
-
+	StateController* pCompiledController_ = nullptr;
 	friend FSMGraphDebug;
 	FSMGraphDebug debug_;
 };

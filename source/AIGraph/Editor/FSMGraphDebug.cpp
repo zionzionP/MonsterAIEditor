@@ -4,10 +4,10 @@
 
 void FSMGraphDebug::Update()
 {
-	SimpleGUI::CheckBox(isDebugDrawNavmesh_, U"Navmesh", Vec2{ 300, 5 });
-	SimpleGUI::CheckBox(isDebugDrawPath_, U"Path", Vec2{ 440, 5 });
-	SimpleGUI::CheckBox(isDebugDrawDistanceRange_, U"Range", Vec2{ 535, 5 });
-	SimpleGUI::CheckBox(isDebugDrawActiveNode_, U"ActiveNode", Vec2{645,5 });	
+	SimpleGUI::CheckBox(isDebugDrawNavmesh_, U"Navmesh", Vec2{ 5, 55 });
+	SimpleGUI::CheckBox(isDebugDrawPath_, U"Path", Vec2{ 145, 55 });
+	SimpleGUI::CheckBox(isDebugDrawDistanceRange_, U"Range", Vec2{ 240,55 });
+	SimpleGUI::CheckBox(isDebugDrawActiveNode_, U"ActiveNode", Vec2{350,55 });	
 }
 
 void FSMGraphDebug::DebugDraw()

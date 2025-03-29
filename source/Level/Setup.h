@@ -73,6 +73,7 @@ public:
 	Enemy* GenerateGhostWithoutAI();
 	SkeletonKnight* GenerateSkeletonWithoutAI();
 	void StartDebug(Enemy* i_pEnemy);
+	void StopDebug();
 	void SetupAI(Enemy* i_pEnemy, StateController* i_pController);
 
 

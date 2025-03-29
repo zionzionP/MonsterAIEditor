@@ -6,33 +6,34 @@ void EditorLevel::Start()
 {
 	Window::Resize(Common::EditorWindowWidth, Common::EditorWindowHeight);
 	ComponentFactoryManager::Get()->AddFactory(COLLISION, DBG_NEW CollisionComponentFactory);
+	if (!currentFSMGraph_)
+	{
+		createNewFsmGraph();
+	}
 }
 void EditorLevel::Update()
 {
-	// 現在のマウスカーソル座標を表示する(dbg)
-	//ClearPrint();
-	//Print << Cursor::Pos();
-	
-
 	renderTexture.clear(Color{30,30,30}).draw();
 	font(U"AIグラフエディター").draw(30, Vec2{ 30, 5 }, Palette::White);	
 
 	if (currentFSMGraph_)
 	{
-		currentFSMGraph_->Update();		
+		currentFSMGraph_->Update();
+		currentFSMGraph_->Draw();
 	}
 	else if	(KeySpace.down())
 	{
 		createNewFsmGraph();
 	}
-
-	if (currentFSMGraph_)
-	{
-		currentFSMGraph_->Draw();
-	}
-
 }
 
+void EditorLevel::CheckLevelChange()
+{
+	if (SimpleGUI::Button(U"タイトルへ", Vec2{ 1450, 5 }))
+	{
+		LevelManager::Get()->ChangeLevel(TITLE_LEVEL);
+	}
+}
 
 void EditorLevel::Exit()
 {
@@ -49,7 +50,6 @@ FSMGraph* EditorLevel::createNewFsmGraph()
 {
 	currentFSMGraph_ = DBG_NEW FSMGraph();
 	currentFSMGraph_->Initialize();
-
 	return currentFSMGraph_;
 }
 

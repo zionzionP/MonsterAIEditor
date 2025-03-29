@@ -36,7 +36,7 @@ private:
 	
 private:	
 	FSMGraph* pOwnerGraph_ = nullptr;
-	Rect selectEnemyPanel_{ 5, 655, 575, 280 };
+	Rect selectEnemyPanel_{ 5, 655, 575, 240 };
 	Vec2 panalTL = { 5,655 };
 	double buttonSize = 96;
 	int32 selectedEnemyIndex_ = 0;

@@ -31,7 +31,7 @@ public:
 private:
 	const Font font{ FontMethod::MSDF, 48 };
 	FSMGraph* pOwnerGraph_ = nullptr;
-	Rect addNodeWindow_{ 585, 655, 1005, 280 };
+	Rect addNodeWindow_{ 585, 655, 1010, 240 };
 	Vec2 panalTL = { 585,655 };
 	std::vector<RectF> addNodeButtons_;
 

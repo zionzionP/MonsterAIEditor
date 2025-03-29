@@ -8,6 +8,7 @@
 #include "AIGraph/Editor/Node/Action/FSMGraphWaitActionNode.h"
 #include <filesystem>
 
+#include "Level/LevelManager.h"
 
 
 void FSMGraph::Update()
@@ -196,11 +197,12 @@ void FSMGraph::handleEvents()
 	attachDecisionToEdge();
 	removeSelectedNode();
 	removeSelectedEdge();
-	removeSelectedDecision();
-	compileGraphAndStartDebug();
+	removeSelectedDecision();	
 	saveFSMGraph();
 	loadFSMGraph();
 	selectAndLoadFSMGraphFile();
+	compileGraphAndStartDebug();
+	stopDebug();
 }
 
 void FSMGraph::addEdgeBetweenNodes()
@@ -523,36 +525,7 @@ void FSMGraph::removeSelectedDecision()
 	}
 }
 
-void FSMGraph::compileGraphAndStartDebug()
-{
-	//test
-	/*if (KeyEnter.down())
-	{
-		if (nodes_.size() != 0)
-		{
-			pCompiledController_ = FSMCompiler::Get()->CompileFromGraph(this);
-			pCurrentEnemy_ = setup.SetupEditorLevelDebugArea(pCompiledController_);
-		}		
-	}*/
-	if(SimpleGUI::Button(U"Debug開始", Vec2{ 1000, 60 }))
-	{
-		if (nodes_.size() != 0 && pCurrentEnemy_)
-		{
-			pCompiledController_ = FSMCompiler::Get()->CompileFromGraph(this);
-			setup.SetupAI(pCurrentEnemy_, pCompiledController_);
-			setup.StartDebug(pCurrentEnemy_);
 
-		}
-		else if (nodes_.size() == 0)
-		{
-			Print << U"ノードが存在しません";
-		}
-		else if (!pCurrentEnemy_)
-		{
-			Print <<U"エネミーを選んでください";
-		}
-	}
-}
 
 void FSMGraph::saveFSMGraph()
 {
@@ -562,11 +535,13 @@ void FSMGraph::saveFSMGraph()
 		std::string testFileName = "FSMGraph/test2.fsmg";
 		FSMGraphSaveLoad::Get()->SaveGraph(this, testFileName);
 	}*/
-	if (SimpleGUI::Button(U"Save", Vec2{ 1500, 60 }))
+	if (SimpleGUI::Button(U"Save", Vec2{ 1510, 60 }))
 	{
 		if (fsmgFilePath_.has_value())
 		{
-			FSMGraphSaveLoad::Get()->SaveGraph(this, fsmgFilePath_.value().narrow());
+			String saveFileName = filePathTe_.text;
+			String saveFilePath = U"FSMGraph/" + saveFileName;
+			FSMGraphSaveLoad::Get()->SaveGraph(this, saveFilePath.narrow());
 		}
 	}
 }
@@ -583,7 +558,7 @@ void FSMGraph::loadFSMGraph()
 
 void FSMGraph::selectAndLoadFSMGraphFile()
 {	
-	if (SimpleGUI::Button(U"Open", Vec2{ 1405, 60 }))
+	if (SimpleGUI::Button(U"Open", Vec2{ 1415, 60 }))
 	{
 		fsmgFilePath_ = Dialog::OpenFile({ { U"Text file", { U"fsmg" } } });
 		if (fsmgFilePath_.has_value())
@@ -596,10 +571,41 @@ void FSMGraph::selectAndLoadFSMGraphFile()
 	}
 	if (!fsmgFileName_.empty())
 	{
-		SimpleGUI::TextBox(filePathTe_, Vec2{ 1200, 60 }, 200);		
+		SimpleGUI::TextBox(filePathTe_, Vec2{ 1210, 60 }, 200);		
 	}
 }
 
+void FSMGraph::compileGraphAndStartDebug()
+{
+	if (SimpleGUI::Button(U"Debug開始", Vec2{ 585, 60 }))
+	{
+		if (nodes_.size() != 0 && pCurrentEnemy_)
+		{
+			pCompiledController_ = FSMCompiler::Get()->CompileFromGraph(this);
+			setup.SetupAI(pCurrentEnemy_, pCompiledController_);
+			setup.StartDebug(pCurrentEnemy_);
+
+		}
+		else if (nodes_.size() == 0)
+		{
+			System::MessageBoxOK( U"ノードが存在しません" );
+		}
+		else if (!pCurrentEnemy_)
+		{
+			System::MessageBoxOK(U"エネミーを選んでください");
+		}
+	}
+}
+
+void FSMGraph::stopDebug()
+{
+	if (SimpleGUI::Button(U"Debug停止", Vec2{ 730, 60 }))
+	{
+		setup.StopDebug();
+		pCompiledController_ = nullptr;
+		pCurrentEnemy_ = nullptr;
+	}
+}
 
 void FSMGraph::updateDebugArea()
 {

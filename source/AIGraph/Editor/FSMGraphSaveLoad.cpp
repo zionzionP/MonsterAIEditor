@@ -49,13 +49,13 @@ void FSMGraphSaveLoad::SaveGraph(const FSMGraph* i_pGraph, const std::string& i_
 	}		
 	std::ofstream ofs(i_filePath);
 	if (!ofs) {
-		Print << U"save failed";
+		System::MessageBoxOK(U"Save failed");
 		return;
 	}
 
 	ofs << jsonArrayToSave.dump(4) << std::endl;
 	ofs.close();
-	Print << U"save successful";
+	System::MessageBoxOK(U"Save successful");
 }
 
 
@@ -66,7 +66,7 @@ void FSMGraphSaveLoad::LoadGraph(FSMGraph* i_pGraph, const std::string& i_filePa
 	std::ifstream ifs(i_filePath);
 
 	if (!ifs) {
-		Print << U"load failed";
+		System::MessageBoxOK(U"Load failed");
 		return;
 	}
 
@@ -76,7 +76,7 @@ void FSMGraphSaveLoad::LoadGraph(FSMGraph* i_pGraph, const std::string& i_filePa
 		ifs >> jsonArrayToLoad;
 	}
 	catch (const nlohmann::json::parse_error& e) {
-		Print << U"load failed";
+		System::MessageBoxOK(U"Load failed");
 		return;
 	}
 	ifs.close();
@@ -101,12 +101,11 @@ void FSMGraphSaveLoad::LoadGraph(FSMGraph* i_pGraph, const std::string& i_filePa
 				LoadEdge(data, i_pGraph);
 			}
 			else {
-				//Print << U"Unknown type: " << type;
-				Print << U"load failed";
+				System::MessageBoxOK(U"Load failed");
 			}
 		}
 	}
-	Print << U"load successful";
+	//System::MessageBoxOK(U"Load successful");
 }
 
 void FSMGraphSaveLoad::LoadNode(const nlohmann::json& i_json, FSMGraph* i_pGraph)

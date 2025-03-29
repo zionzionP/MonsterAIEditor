@@ -9,7 +9,7 @@ public:
 	FSMGraphSetAroundIndexActionNode()
 	{
 		typeName_ = U"FSMGraphSetAroundIndexActionNode";
-		displayName_ = U"SetChasePoint";
+		displayName_ = U"SetPoint";
 		color_ = Palette::Blue;
 	};
 	~FSMGraphSetAroundIndexActionNode()override = default;

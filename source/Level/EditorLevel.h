@@ -13,6 +13,7 @@ public:
 
 	void Start() override;
 	void Update() override;
+	void CheckLevelChange() override;
 	void Exit() override;
 
 private:
@@ -21,10 +22,5 @@ private:
 private:
 	RenderTexture renderTexture{ 1600, 900 };
 	Font font{ FontMethod::MSDF, 48 };
-
 	FSMGraph* currentFSMGraph_ = nullptr;
-
-	bool isAddingEdge = false;
-
-
 };

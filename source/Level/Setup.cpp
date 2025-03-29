@@ -825,6 +825,12 @@ void Setup::StartDebug(Enemy* i_pEnemy)
 	i_pEnemy->SetTarget(pPlayer_);
 }
 
+void Setup::StopDebug()
+{
+	ActorManager::Get()->ClearActor();
+	pPlayer_ = nullptr;
+}
+
 
 void Setup::SetupAI(Enemy* i_pEnemy, StateController* i_pController)
 {
