@@ -55,6 +55,12 @@ void FSMGrapSelectEnemyPanel::geneEnemyWithoutAI()
 			pOwnerGraph_->SetCurrentEnemy(pOwnerGraph_->GetSetup().GenerateGhostWithoutAI());
 		}
 		break;
+		case static_cast<int32>(EnemyType::SkeletonKnightWhite):
+		{
+			pOwnerGraph_->GetSetup().SetupEditorLevelDebugArea();
+			pOwnerGraph_->SetCurrentEnemy(pOwnerGraph_->GetSetup().GenerateSkeletonWhiteWithoutAI());
+		}
+		break;
 		case static_cast<int32>(EnemyType::SkeletonKnight):
 		{
 			pOwnerGraph_->GetSetup().SetupEditorLevelDebugArea();

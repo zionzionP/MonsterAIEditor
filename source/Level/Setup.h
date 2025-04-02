@@ -9,6 +9,7 @@
 #include "AIGraph/StateMachine/AIFactory.h"
 #include "Actor/Knight.h"
 #include "Actor/SkeletonKnight.h"
+#include "Actor/SkeletonKnightWhite.h"
 #include "Level/StageMap.h"
 #include "MapItem/HealItem.h"
 
@@ -56,6 +57,7 @@ public:
 	Enemy* GenerateEnemy();
 	Enemy* GenerateEnemyType2();
 	SkeletonKnight* GenerateSkeleton();
+	SkeletonKnightWhite* GenerateSkeletonWhite();
 	Knight* GeneratePlayer();
 	HealItem* GenerateHealItem();
 	void PlayerInfinityHP();
@@ -72,6 +74,7 @@ public:
 	void SetupEditorLevelDebugArea();
 	Enemy* GenerateGhostWithoutAI();
 	SkeletonKnight* GenerateSkeletonWithoutAI();
+	SkeletonKnightWhite* GenerateSkeletonWhiteWithoutAI();
 	void StartDebug(Enemy* i_pEnemy);
 	void StopDebug();
 	void SetupAI(Enemy* i_pEnemy, StateController* i_pController);

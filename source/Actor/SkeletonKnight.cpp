@@ -76,7 +76,7 @@ void SkeletonKnight::UpdateAttack(double i_deltaTime)
 			//キャラクターに位置にエフェクトの位置を加算
 			Vec2 pos = position_ + Common::attackVec2[movement_.direction];			
 			pAttackActor_->SetDesignatedPos(pos);
-			effect_.add<AttackEffectSkeleton>(pAttackActor_, movement_.effectDirection);
+			addAttackEffect();
 			RectF& attackHitbox = pAttackActor_->GetComponent<CollisionComponent, COLLISION>()->Edit().hitbox;
 			if (movement_.effectDirection == 1 || movement_.effectDirection == 3)
 			{

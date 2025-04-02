@@ -435,6 +435,7 @@
     <ClInclude Include="source\Actor\Enemy.h" />
     <ClInclude Include="source\Actor\Knight.h" />
     <ClInclude Include="source\Actor\SkeletonKnight.h" />
+    <ClInclude Include="source\Actor\SkeletonKnightWhite.h" />
     <ClInclude Include="source\Actor\Wall.h" />
     <ClInclude Include="source\AIGraph\Editor\Decision\FSMGraphActionDoneDecision.h" />
     <ClInclude Include="source\AIGraph\Editor\Decision\FSMGraphDecision.h" />

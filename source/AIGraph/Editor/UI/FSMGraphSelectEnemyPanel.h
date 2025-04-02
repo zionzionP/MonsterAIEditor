@@ -6,6 +6,7 @@ class FSMGraph;
 enum class EnemyType
 {
 	Ghost = 0,
+	SkeletonKnightWhite,
 	SkeletonKnight,
 
 	EnemyTypeMAX,
@@ -26,12 +27,9 @@ public:
 
 private:
 	void setupSelectEnemyButton();
-	void handleEvents();
-	
+	void handleEvents();	
 	void selectEnemy();
 	void geneEnemyWithoutAI();
-
-
 	void drawSelectEnemyButton();
 	
 private:	
@@ -45,7 +43,8 @@ private:
 
 	//描画用テキスチャー	
 	String ghostTexturePath = U"Assets/pipo-charachip019.png";
+	String skeletonKnightWhiteTexturePath = U"Assets/skeleton-knight-white.png";
 	String skeletonKnightTexturePath = U"Assets/skeleton-knight.png";
-	std::vector<String> texturePaths_ = { ghostTexturePath, skeletonKnightTexturePath };
+	std::vector<String> texturePaths_ = { ghostTexturePath,skeletonKnightWhiteTexturePath, skeletonKnightTexturePath };
 
 };

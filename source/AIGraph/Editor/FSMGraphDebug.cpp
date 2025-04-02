@@ -37,9 +37,9 @@ void FSMGraphDebug::DebugDrawPath()
 }
 void FSMGraphDebug::DebugDrawDistanceRange()
 {
-	if (isDebugDrawDistanceRange_)
+	if (isDebugDrawDistanceRange_ && pOwnerGraph_->pCurrentEnemy_ != nullptr)
 	{
-		if (pOwnerGraph_->pSelectedNode_)
+		if (pOwnerGraph_->pSelectedNode_ )
 		{
 			pOwnerGraph_->pSelectedNode_->DebugDraw(pOwnerGraph_->pCurrentEnemy_);
 		}

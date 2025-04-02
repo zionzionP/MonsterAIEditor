@@ -66,6 +66,7 @@ public :
 	StateController* SetupStateMachineType2();
 	//スケルトンタイプエネミー
 	StateController* SetupStateMachineSkeletonKnight();
+	StateController* SetupStateMachineSkeletonKnightWhite();
 	
 };
 

@@ -63,7 +63,9 @@ void FSMGraphAddNodePanel::DrawAddNodeButton()
 	addNodeButtons_[3].draw(Palette::Green);
 	font(U"Patrol").draw(25, addNodeButtons_[3].tl(), Palette::White);
 	addNodeButtons_[4].draw(Palette::Blue);
-	font(U"SetChasePos").draw(25, addNodeButtons_[4].tl(), Palette::White);
+	font(U"Set").draw(25, addNodeButtons_[4].tl(), Palette::White);
+	font(U"Point").draw(25, addNodeButtons_[4].tl() + Vec2{0,25}, Palette::White);
 	addNodeButtons_[5].draw(Palette::Green);
-	font(U"ChaseAround").draw(25, addNodeButtons_[5].tl(), Palette::White);
+	font(U"Chase").draw(25, addNodeButtons_[5].tl(), Palette::White);
+	font(U"Around").draw(25, addNodeButtons_[5].tl() + Vec2{0, 25}, Palette::White);
 }

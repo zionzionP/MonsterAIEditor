@@ -28,8 +28,10 @@ public:
 	void PhaseTransform();
 	void SetAttackInActive() override;
 	void UpdateEffect() override { effect_.update(); }
+	
 
-private:
+protected:
+	virtual void addAttackEffect() { effect_.add<AttackEffectSkeleton>(pAttackActor_, movement_.effectDirection); }
 	//攻撃用Actor
 	Attack* pAttackActor_ = DBG_NEW Attack;
 	//エフェクト発生装置

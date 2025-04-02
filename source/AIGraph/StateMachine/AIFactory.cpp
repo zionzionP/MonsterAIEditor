@@ -138,3 +138,43 @@ StateController* AIFactory::SetupStateMachineSkeletonKnight()
 	pController->SetCurrentState(pController->GetStateMap()[PATROL_STATE].get());
 	return pController;
 }
+
+StateController* AIFactory::SetupStateMachineSkeletonKnightWhite()
+{
+	StateController* pController = DBG_NEW StateController();
+	//ステートの設定
+	pController->GetStateMap().emplace(StateId::PATROL_STATE, DBG_NEW State);
+	pController->GetStateMap().emplace(StateId::CHASE_STATE, DBG_NEW State);
+	pController->GetStateMap().emplace(StateId::ATTACK_STATE, DBG_NEW State);
+	//アクションの設定
+	pController->GetActionMap().emplace(ActionId::PATROL_ACTION, DBG_NEW PatrolAction);
+	pController->GetActionMap().emplace(ActionId::CHASE_AROUND_ACTION, DBG_NEW ChaseAroundAction);
+	pController->GetActionMap().emplace(ActionId::SET_AROUND_INDEX_ACTION, DBG_NEW SetAroundIndexAction);
+	pController->GetActionMap().emplace(ActionId::ATTACK_ACTION, DBG_NEW AttackAction);
+	//遷移と遷移条件の設定
+	pController->GetDecisionMap().emplace(DecisionId::DISTANCE_DECISION_160_INF, DBG_NEW DistanceDecision(160.0, INFINITY));
+	pController->GetDecisionMap().emplace(DecisionId::DISTANCE_DECISION_80_160, DBG_NEW DistanceDecision(50.0, 160.0));
+	pController->GetDecisionMap().emplace(DecisionId::DISTANCE_DECISION_0_80, DBG_NEW DistanceAndObstacleDecision(0.0, 50));
+
+	FSM::Transition transitionPtoC(pController->GetDecisionMap()[DISTANCE_DECISION_80_160].get(), pController->GetStateMap()[CHASE_STATE].get(), pController->GetStateMap()[PATROL_STATE].get());
+	FSM::Transition transitionCtoP(pController->GetDecisionMap()[DISTANCE_DECISION_160_INF].get(), pController->GetStateMap()[PATROL_STATE].get(), pController->GetStateMap()[CHASE_STATE].get());
+	FSM::Transition transitionCtoA(pController->GetDecisionMap()[DISTANCE_DECISION_0_80].get(), pController->GetStateMap()[ATTACK_STATE].get(), pController->GetStateMap()[CHASE_STATE].get());
+	FSM::Transition transitionAtoC(pController->GetDecisionMap()[DISTANCE_DECISION_80_160].get(), pController->GetStateMap()[CHASE_STATE].get(), pController->GetStateMap()[ATTACK_STATE].get());
+
+	//パトロールステート
+	pController->GetStateMap()[PATROL_STATE].get()->GetActions().push_back(pController->GetActionMap()[PATROL_ACTION].get());
+	pController->GetStateMap()[PATROL_STATE].get()->GetTransitions().push_back(transitionPtoC);
+	//追跡ステート
+	pController->GetStateMap()[CHASE_STATE].get()->GetEnterActions().push_back(pController->GetActionMap()[SET_AROUND_INDEX_ACTION].get());
+	pController->GetStateMap()[CHASE_STATE].get()->GetActions().push_back(pController->GetActionMap()[CHASE_AROUND_ACTION].get());
+	pController->GetStateMap()[CHASE_STATE].get()->GetTransitions().push_back(transitionCtoP);
+	pController->GetStateMap()[CHASE_STATE].get()->GetTransitions().push_back(transitionCtoA);
+	//攻撃ステート
+	pController->GetStateMap()[ATTACK_STATE].get()->GetActions().push_back(pController->GetActionMap()[ATTACK_ACTION].get());
+	pController->GetStateMap()[ATTACK_STATE].get()->GetTransitions().push_back(transitionAtoC);
+
+
+	pController->SetCurrentState(pController->GetStateMap()[PATROL_STATE].get());
+	return pController;
+}
+

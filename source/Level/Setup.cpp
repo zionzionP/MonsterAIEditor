@@ -362,6 +362,47 @@ SkeletonKnight* Setup::GenerateSkeleton()
 	}
 	return pSkeleton;
 }
+
+SkeletonKnightWhite* Setup::GenerateSkeletonWhite()
+{
+	SkeletonKnightWhite* pSkeleton = DBG_NEW SkeletonKnightWhite();
+	CollisionComponent* pCollisionE = pSkeleton->AddComponent<CollisionComponent, COLLISION>();
+	pCollisionE->Edit().hitboxType = HitboxType::CIRCLE;
+	pCollisionE->Edit().hitboxCircle = { pSkeleton->GetPosition(), 16 };
+	pCollisionE->Edit().collisionFlags = Common::CollisionTag::COLLISION_ENEMY;
+	pCollisionE->Edit().collisionTo = Common::CollisionTag::COLLISION_ATTACKEFFECT;
+	pCollisionE->Edit().isActivate = true;
+	pCollisionE->Edit().hpEffect = Common::Enemy_Attack;
+	pSkeleton->SetHP(Common::SkeletonMaxHP);
+	pSkeleton->GetMovement().currentSpeed = rnd(150, 150);
+	pSkeleton->SetAttackId(1);
+	pSkeleton->SetTarget(pPlayer_);
+	pSkeleton->GetAgent().SetNavMesh(&navMesh_);
+	StateController* pController = AIFactory::Get()->SetupStateMachineSkeletonKnightWhite();
+	pController->SetOwner(pSkeleton);
+	pController->SetOwnerEnemy(pSkeleton);
+	pSkeleton->SetStateController(pController);
+	Vec2 playNavMeshPos = Common::PixelPosToNavMeshPos(pPlayer_->GetPosition());
+	Point pt = { rnd(0,19), rnd(0,14) };
+	const int distanceFromPlayer = 6;
+	while (!navMesh_.isOnNavMesh(pt) || pt.distanceFromSq(playNavMeshPos) < distanceFromPlayer * distanceFromPlayer)
+	{
+		pt = { rnd(0,19), rnd(0,14) };
+	}
+	Vec2 pos = Common::NavMeshPosToPixelPos(pt);
+	pSkeleton->SetPosition(pos);
+	if (isShowPathOn)
+	{
+		pSkeleton->SetIsShowPathOn(true);
+	}
+	else
+	{
+		pSkeleton->SetIsShowPathOn(false);
+	}
+	return pSkeleton;
+}
+
+
 Knight* Setup::GeneratePlayer()
 {
 	Knight* pKnight = DBG_NEW Knight();
@@ -429,7 +470,7 @@ void Setup::SetupGameLevelStage1(const Vec2& i_startPos)
 	for (int i= 0; i < enemyNum;++i)
 	{
 		GenerateEnemy();
-	}	
+	}
 }
 void Setup::SetupGameLevelStage2(const Vec2& i_startPos)
 {
@@ -442,10 +483,14 @@ void Setup::SetupGameLevelStage2(const Vec2& i_startPos)
 	GenerateHealItem();
 	GenerateHealItem();
 	actorsNum_ = static_cast<int>(ActorManager::Get()->GetActors().size());
-	const int enemyNum = 5;
+	const int enemyNum = 3;
 	for (int i = 0; i < enemyNum; ++i)
 	{
 		GenerateEnemy();
+	}
+	for (int i = 0; i < enemyNum; ++i)
+	{
+		GenerateSkeletonWhite();
 	}
 }
 void Setup::SetupGameLevelStage3(const Vec2& i_startPos)
@@ -786,7 +831,7 @@ Enemy* Setup::GenerateGhostWithoutAI()
 	pEnemy->SetAttackId(1);
 	pEnemy->GetAgent().SetNavMesh(&navMesh_);
 
-	Vec2 genePos = { 300,200 };//TEST
+	Vec2 genePos = { 300,200 };
 	pEnemy->SetPosition(genePos);
 	pEnemy->SetGoalPos(genePos);
 	pEnemy->SetMoveable(false);	
@@ -809,7 +854,30 @@ SkeletonKnight* Setup::GenerateSkeletonWithoutAI()
 	pSkeleton->GetAgent().SetNavMesh(&navMesh_);
 	pSkeleton->SetPosition({ 275,275 });
 
-	Vec2 genePos = { 300,200 };//TEST
+	Vec2 genePos = { 300,200 };
+	pSkeleton->SetPosition(genePos);
+	pSkeleton->SetGoalPos(genePos);
+	pSkeleton->SetMoveable(false);
+	return pSkeleton;
+}
+
+SkeletonKnightWhite* Setup::GenerateSkeletonWhiteWithoutAI()
+{
+	SkeletonKnightWhite* pSkeleton = DBG_NEW SkeletonKnightWhite();
+	CollisionComponent* pCollisionE = pSkeleton->AddComponent<CollisionComponent, COLLISION>();
+	pCollisionE->Edit().hitboxType = HitboxType::CIRCLE;
+	pCollisionE->Edit().hitboxCircle = { pSkeleton->GetPosition(), 16 };
+	pCollisionE->Edit().collisionFlags = Common::CollisionTag::COLLISION_ENEMY;
+	pCollisionE->Edit().collisionTo = Common::CollisionTag::COLLISION_ATTACKEFFECT;
+	pCollisionE->Edit().isActivate = true;
+	pCollisionE->Edit().hpEffect = Common::Enemy_Attack;
+	pSkeleton->SetHP(Common::SkeletonMaxHP);
+	pSkeleton->GetMovement().currentSpeed = rnd(150, 150);
+	pSkeleton->SetAttackId(1);
+	pSkeleton->GetAgent().SetNavMesh(&navMesh_);
+	pSkeleton->SetPosition({ 275,275 });
+
+	Vec2 genePos = { 300,200 };
 	pSkeleton->SetPosition(genePos);
 	pSkeleton->SetGoalPos(genePos);
 	pSkeleton->SetMoveable(false);
@@ -821,6 +889,7 @@ void Setup::StartDebug(Enemy* i_pEnemy)
 	{
 		pPlayer_ = GeneratePlayer();
 		pPlayer_->SetHP(Common::PlayerMaxHP);
+		pPlayer_->SetPosition({ 287,452 });
 	}
 	i_pEnemy->SetTarget(pPlayer_);
 }
