@@ -25,7 +25,7 @@ public:
 	nlohmann::json Serialize() const override;
 	virtual void Deserialize(const nlohmann::json& i_json);	
 
-private:
+protected:
 	double minDistance = 0.0;
 	TextEditState minDistanceTe;
 	double maxDistance = 0.0;

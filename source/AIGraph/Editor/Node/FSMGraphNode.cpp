@@ -32,5 +32,18 @@ void FSMGraphNode::drawDisplayNameInNode()
 void FSMGraphNode::DrawProperty()
 {
 	font(displayName_).draw(30, Vec2{ 1345, 100 }, Palette::Black);
+	for (int i = 0; i < descriptionForDisplay_.size(); ++i)
+	{
+		font(descriptionForDisplay_[i]).draw(20, Vec2{ 1345,135 } + i * Vec2{0,20}, Palette::Black);
+	}
+}
+
+void FSMGraphNode::splitDescription()
+{
+	int wordNum = 12;
+	for (int i = 0; i < description_.length(); i += wordNum)
+	{
+		descriptionForDisplay_.push_back(description_.substr(i, wordNum));
+	}
 }
 

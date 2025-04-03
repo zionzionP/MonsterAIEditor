@@ -39,11 +39,11 @@ public:
 	/// @brief エッジのプロパティを取得する
 	/// @return エッジのプロパティ
 	FSMGraphEdgeProperty& GetProperty() { return property_; }
-	/// @brief アタッチされたディシジョンを取得する
-	/// @return アタッチされたディシジョン
+	/// @brief アタッチされた遷移条件を取得する
+	/// @return アタッチされた遷移条件
 	auto* GetAttachedDecision() const { return pAttachedDecision_; }
-	/// @brief ディシジョンをアタッチする
-	/// @param pDecision アタッチするディシジョン
+	/// @brief 遷移条件をアタッチする
+	/// @param pDecision アタッチする遷移条件
 	void SetAttachedDecision(FSMGraphDecision* pDecision) { pAttachedDecision_ = pDecision; }
 
 	/// @brief 更新処理
@@ -53,8 +53,10 @@ public:
 	/// @brief デバッグ描画処理
 	/// @param pActor アクター
 	void DebugDraw(Actor* pActor);
+	/// @brief 遷移条件がアタッチの場合、小さい点を描画
+	void DrawIfHasAttachedDecision();
 	/// @brief クリックされたかどうかを判定する
-	/// @return クリックされた場合はtrue、そうでない場合はfalse
+	/// @return クリックされた場合はtrue、そうでない場合はfalse	
 	bool IsClicked() const;
 	/// @brief シリアライズ処理
 	/// @return シリアライズされたJSONオブジェクト
@@ -69,5 +71,5 @@ private:
 	FSMGraphNode* pToNode = nullptr; ///< エッジの終点ノード
 
 	FSMGraphEdgeProperty property_; ///< エッジのプロパティ
-	FSMGraphDecision* pAttachedDecision_ = nullptr; ///< アタッチされたディシジョン
+	FSMGraphDecision* pAttachedDecision_ = nullptr; ///< アタッチされた遷移条件
 };

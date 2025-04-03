@@ -1,7 +1,6 @@
 ﻿#include "AIGraph/Editor/FSMGraphSaveLoad.h"
 #include "AIGraph/Editor/FSMGraph.h"
 #include "Core/json.hpp"
-#include <iostream>
 #include <fstream>
 
 #include "AIGraph/Editor/Node/Action/FSMGraphAttackActionNode.h"
@@ -12,6 +11,7 @@
 #include "AIGraph/Editor/Node/Action/FSMGraphWaitActionNode.h"
 #include "AIGraph/Editor/Decision/FSMGraphActionDoneDecision.h"
 #include "AIGraph/Editor/Decision/FSMGraphDistanceDecision.h"
+#include "Decision/FSMGraphDistanceAndObstacleDecision.h"
 
 #define LOAD_NODE(NodeType) \
     else if (nodeType == #NodeType) \
@@ -135,6 +135,7 @@ void FSMGraphSaveLoad::LoadDecision(const nlohmann::json& i_json, FSMGraph* i_pG
 		if (false) {}
 		LOAD_DECISION(FSMGraphDistanceDecision)
 		LOAD_DECISION(FSMGraphActionDoneDecision)
+		LOAD_DECISION(FSMGraphDistanceAndObstacleDecision)
 		else
 		{
 			Print << U"unknow type";

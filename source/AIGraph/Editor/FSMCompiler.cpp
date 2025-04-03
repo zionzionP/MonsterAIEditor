@@ -23,6 +23,13 @@ StateController* FSMCompiler::CompileFromGraph(FSMGraph* i_pGraph)
 	for (int32 index = 0; index < edges.size(); ++index)
 	{
 		//遷移条件の登録
+		auto* pAttachedDecision = edges[index]->GetAttachedDecision();
+		if (pAttachedDecision == nullptr)
+		{
+			System::MessageBoxOK(U"遷移条件がないエッジが存在します");
+			return nullptr;
+		}
+
 		edges[index]->GetAttachedDecision()->RegisterDecision(pController);
 		int32 fromStateIndex = edges[index]->GetFromNode()->GetNodeIndex();
 		int32 toStateIndex = edges[index]->GetToNode()->GetNodeIndex();

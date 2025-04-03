@@ -272,7 +272,8 @@ Enemy* Setup::GenerateEnemy()
 	pEnemy->SetAttackId(1);
 	pEnemy->SetTarget(pPlayer_);
 	pEnemy->GetAgent().SetNavMesh(&navMesh_);	
-	StateController* pController = AIFactory::Get()->SetupStateMachineType2();
+	//StateController* pController = AIFactory::Get()->SetupStateMachineType2();
+	StateController* pController = AIFactory::Get()->SetupStateMachineFromFile(U"FSMGraph/ghost.fsmg");
 	pController->SetOwner(pEnemy);
 	pController->SetOwnerEnemy(pEnemy);
 	pEnemy->SetStateController(pController);	
@@ -488,7 +489,8 @@ void Setup::SetupGameLevelStage2(const Vec2& i_startPos)
 	{
 		GenerateEnemy();
 	}
-	for (int i = 0; i < enemyNum; ++i)
+	const int skeletonNum = 2;
+	for (int i = 0; i < skeletonNum; ++i)
 	{
 		GenerateSkeletonWhite();
 	}
@@ -834,6 +836,7 @@ Enemy* Setup::GenerateGhostWithoutAI()
 	Vec2 genePos = { 300,200 };
 	pEnemy->SetPosition(genePos);
 	pEnemy->SetGoalPos(genePos);
+	pEnemy->SetTargetPos(genePos);
 	pEnemy->SetMoveable(false);	
 	return pEnemy;
 }
@@ -857,6 +860,7 @@ SkeletonKnight* Setup::GenerateSkeletonWithoutAI()
 	Vec2 genePos = { 300,200 };
 	pSkeleton->SetPosition(genePos);
 	pSkeleton->SetGoalPos(genePos);
+	pSkeleton->SetTargetPos(genePos);
 	pSkeleton->SetMoveable(false);
 	return pSkeleton;
 }
@@ -880,6 +884,7 @@ SkeletonKnightWhite* Setup::GenerateSkeletonWhiteWithoutAI()
 	Vec2 genePos = { 300,200 };
 	pSkeleton->SetPosition(genePos);
 	pSkeleton->SetGoalPos(genePos);
+	pSkeleton->SetTargetPos(genePos);
 	pSkeleton->SetMoveable(false);
 	return pSkeleton;
 }

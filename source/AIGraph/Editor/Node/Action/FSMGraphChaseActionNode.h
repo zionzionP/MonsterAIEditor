@@ -10,7 +10,9 @@ public:
 	{
 		typeName_ = U"FSMGraphChaseActionNode";
 		displayName_ = U"Chase";
+		description_ = U"ターゲットの座標に追跡";
 		color_ = Palette::Green;
+		splitDescription();
 	};
 	~FSMGraphChaseActionNode()override = default;
 

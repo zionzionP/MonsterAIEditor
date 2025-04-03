@@ -439,6 +439,7 @@
     <ClInclude Include="source\Actor\Wall.h" />
     <ClInclude Include="source\AIGraph\Editor\Decision\FSMGraphActionDoneDecision.h" />
     <ClInclude Include="source\AIGraph\Editor\Decision\FSMGraphDecision.h" />
+    <ClInclude Include="source\AIGraph\Editor\Decision\FSMGraphDistanceAndObstacleDecision.h" />
     <ClInclude Include="source\AIGraph\Editor\Decision\FSMGraphDistanceDecision.h" />
     <ClInclude Include="source\AIGraph\Editor\FSMCompiler.h" />
     <ClInclude Include="source\AIGraph\Editor\FSMGraph.h" />

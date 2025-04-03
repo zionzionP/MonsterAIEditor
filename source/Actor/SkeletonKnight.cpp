@@ -49,6 +49,18 @@ void SkeletonKnight::UpdateAttack(double i_deltaTime)
 	{		
 		if (isAttacking_)
 		{
+			// 攻撃前の待機時間をカウント
+			preAttackTimer_ += i_deltaTime;
+
+			// 0.5秒未満ならまだ攻撃しない
+			if (preAttackTimer_ < preAttackTime_)
+			{
+				isMoveable_ = false; // 攻撃準備中は移動不可
+				return;
+			}
+			// タイマーをリセットして攻撃を開始
+			preAttackTimer_ = 0.0;
+
 			Vec2 diff = pTarget_->GetPosition() - position_;
 			if (diff.x > 0 && diff.x > std::abs(diff.y))//右
 			{
@@ -116,6 +128,8 @@ void SkeletonKnight::PhaseTransform()
 		effect_.add<RangeAttackEffectSkeleton>(position_);
 		const double newSpeed = 220;
 		movement_.currentSpeed = newSpeed;
+		const double newPreAttackTime = 0.0;
+		preAttackTime_ = newPreAttackTime;
 	}
 }
 void SkeletonKnight::UpdateRender(uint64 i_millisecTime)

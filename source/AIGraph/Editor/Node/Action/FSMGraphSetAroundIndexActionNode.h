@@ -10,7 +10,9 @@ public:
 	{
 		typeName_ = U"FSMGraphSetAroundIndexActionNode";
 		displayName_ = U"SetPoint";
+		description_ = U"ターゲット周りの8マスからランダムに1つを選ぶ";
 		color_ = Palette::Blue;
+		splitDescription();
 	};
 	~FSMGraphSetAroundIndexActionNode()override = default;
 

@@ -9,6 +9,7 @@
 #endif
 
 class StateController;
+class FSMGraph;
 
 enum StateId {
 	PATROL_STATE = 0,//パトロール
@@ -43,7 +44,7 @@ class AIFactory : public Singleton<AIFactory>
 {
 public :
 	AIFactory(){}
-	~AIFactory() = default;
+	~AIFactory();
 
 	void RegisterState(const int32& i_index, StateController* io_pController);
 
@@ -67,6 +68,10 @@ public :
 	//スケルトンタイプエネミー
 	StateController* SetupStateMachineSkeletonKnight();
 	StateController* SetupStateMachineSkeletonKnightWhite();
-	
+
+	StateController* SetupStateMachineFromFile(const String& i_path);
+
+private:
+	FSMGraph* pFsmGraphForLoad_ = nullptr;
 };
 

@@ -10,7 +10,9 @@ public:
 	{
 		typeName_ = U"FSMGraphChaseAroundActionNode";
 		displayName_ = U"ChaseAround";
+		description_ = U"ターゲット周りの8マス中の1マスに追跡";
 		color_ = Palette::Green;
+		splitDescription();
 	};
 	~FSMGraphChaseAroundActionNode()override = default;
 

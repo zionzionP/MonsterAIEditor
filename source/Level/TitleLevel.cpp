@@ -33,18 +33,19 @@ void TitleLevel::Update()
 	}
 	if (!isInstructionOn)
 	{
-		font(U"2DAT").drawAt(50, Vec2{ 320, 150 }, Palette::White);
+		font(U"MONSTER AI EDITOR").drawAt(50, Vec2{ 320, 150 }, Palette::White);
+		font(U"THE GAME").drawAt(30, Vec2{ 320, 200 }, Palette::White);
 		font(U"PRESS ENTER BUTTON").drawAt(20, Vec2{ 320, 380 }, Palette::White);
-		//font(U"Press F2 to enter DEBUG").drawAt(15, Vec2{ 550, 470 }, Palette::White);
+		font(U"Press F3 to enter editor").drawAt(15, Vec2{ 550, 470 }, Palette::White);
 		if (KeyEnter.down())
 		{
 			isInstructionOn = true;
 		}
-		if (KeyF2.down())
-		{
-			//Debug機能
-			LevelManager::Get()->ChangeLevel(LevelName::DEBUG_LEVEL);
-		}
+		//if (KeyF2.down())
+		//{
+		//	//Debug機能
+		//	LevelManager::Get()->ChangeLevel(LevelName::DEBUG_LEVEL);
+		//}
 
 		if (KeyF3.down())
 		{

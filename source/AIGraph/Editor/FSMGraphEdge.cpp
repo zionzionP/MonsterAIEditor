@@ -52,6 +52,7 @@ void FSMGraphEdge::Draw()
 		}
 		arrow.drawArrow(lineThickness, { 10,10 }, Palette::White);
 	}
+	DrawIfHasAttachedDecision();
 }
 
 void FSMGraphEdge::DebugDraw(Actor* pActor)
@@ -61,6 +62,17 @@ void FSMGraphEdge::DebugDraw(Actor* pActor)
 		pAttachedDecision_->DebugDraw(pActor);
 	}
 }
+
+void FSMGraphEdge::DrawIfHasAttachedDecision()
+{
+	if (pAttachedDecision_)
+	{
+		Vec2 lineCenter = edgeLine_.center();
+		Vec2 offset = edgeLine_.normal() * 10;
+		Circle{ lineCenter + offset,3 }.draw();
+	}
+}
+
 
 
 bool FSMGraphEdge::IsClicked() const

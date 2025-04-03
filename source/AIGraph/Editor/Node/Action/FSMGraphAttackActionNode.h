@@ -10,7 +10,9 @@ public:
 	{
 		typeName_ = U"FSMGraphAttackActionNode";
 		displayName_ = U"Attack";
-		color_ = Palette::Red;	
+		description_ = U"ターゲットに攻撃";
+		color_ = Palette::Red;
+		splitDescription();
 	};
 	~FSMGraphAttackActionNode()override = default;
 

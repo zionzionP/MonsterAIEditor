@@ -96,8 +96,8 @@
         "decision",
         {
             "index": 3,
-            "maxDistance": 80.0,
-            "minDistance": 0.0,
+            "maxDistance": 160.0,
+            "minDistance": 80.0,
             "position": [
                 1445.0,
                 330.0
@@ -122,13 +122,13 @@
         "decision",
         {
             "index": 5,
-            "maxDistance": 160.0,
-            "minDistance": 80.0,
+            "maxDistance": 80.0,
+            "minDistance": 0.0,
             "position": [
                 1445.0,
                 330.0
             ],
-            "typeName": "FSMGraphDistanceDecision"
+            "typeName": "FSMGraphDistanceAndObstacleDecision"
         }
     ],
     [
@@ -144,7 +144,7 @@
     [
         "edge",
         {
-            "attachedDecisionIndex": 5,
+            "attachedDecisionIndex": 4,
             "fromNodeIndex": 1,
             "index": 1,
             "priority": 0,
@@ -164,7 +164,7 @@
     [
         "edge",
         {
-            "attachedDecisionIndex": 3,
+            "attachedDecisionIndex": 5,
             "fromNodeIndex": 3,
             "index": 3,
             "priority": 2,
@@ -174,7 +174,7 @@
     [
         "edge",
         {
-            "attachedDecisionIndex": 4,
+            "attachedDecisionIndex": 3,
             "fromNodeIndex": 4,
             "index": 4,
             "priority": 0,

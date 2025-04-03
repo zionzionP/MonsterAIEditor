@@ -14,7 +14,7 @@ void EditorLevel::Start()
 void EditorLevel::Update()
 {
 	renderTexture.clear(Color{30,30,30}).draw();
-	font(U"AIグラフエディター").draw(30, Vec2{ 30, 5 }, Palette::White);	
+	font(U"モンスターAIエディター").draw(30, Vec2{ 30, 5 }, Palette::White);	
 
 	if (currentFSMGraph_)
 	{

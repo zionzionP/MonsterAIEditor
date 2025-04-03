@@ -5,6 +5,7 @@ enum class DecisionType
 {
 	FSMGraphDistanceDecision = 0,
 	FSMGraphActionDoneDecision,
+	FSMGraphDistanceAndObstacleDecision,
 
 	FSMGraphDecisionMAX,
 };

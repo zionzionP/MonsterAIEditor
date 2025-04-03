@@ -1,5 +1,7 @@
 ﻿#include "AIGraph/StateMachine/AIFactory.h"
 
+#include "AIGraph/Editor/FSMCompiler.h"
+#include "AIGraph/Editor/FSMGraphSaveLoad.h"
 #include "AIGraph/StateMachine/State.h"
 #include "AIGraph/StateMachine/Transition.h"
 #include "AIGraph/StateMachine/Action/Action.h"
@@ -15,6 +17,12 @@
 #include "AIGraph/StateMachine/Decision/DistanceToPatrolPosDecision.h"
 #include "AIGraph/StateMachine/Action/PatrolInRectAreaAction.h"
 #include "AIGraph/StateMachine/Decision/PlayerInAreaDecision.h"
+
+AIFactory::~AIFactory()
+{
+	delete pFsmGraphForLoad_;
+}
+
 
 void AIFactory::RegisterState(const int32& i_index, StateController* io_pController)
 {
@@ -177,4 +185,18 @@ StateController* AIFactory::SetupStateMachineSkeletonKnightWhite()
 	pController->SetCurrentState(pController->GetStateMap()[PATROL_STATE].get());
 	return pController;
 }
+
+StateController* AIFactory::SetupStateMachineFromFile(const String& i_path)
+{
+	if (pFsmGraphForLoad_ == nullptr)
+	{
+		pFsmGraphForLoad_ = DBG_NEW FSMGraph();
+	}
+	FSMGraphSaveLoad* pSaveLoad = FSMGraphSaveLoad::Get();
+	pSaveLoad->LoadGraph( pFsmGraphForLoad_, i_path.narrow());
+
+	StateController* pController =  FSMCompiler::Get()->CompileFromGraph(pFsmGraphForLoad_);
+	return pController;
+}
+
 

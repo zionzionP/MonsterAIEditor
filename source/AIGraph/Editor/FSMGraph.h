@@ -43,8 +43,8 @@ public:
 	/// @brief ノードを追加する
 	/// @param spNode 追加するノード
 	void AddNode(const std::shared_ptr<FSMGraphNode>& spNode);
-	/// @brief ディシジョンを追加する
-	/// @param spDecision 追加するディシジョン
+	/// @brief 遷移条件を追加する
+	/// @param spDecision 追加する遷移条件
 	void AddDecision(const std::shared_ptr<FSMGraphDecision>& spDecision);
 	/// @brief エッジを追加する
 	/// @param spEdge 追加するエッジ
@@ -56,8 +56,8 @@ public:
 	/// @brief エッジを削除する
 	/// @param pEdge 削除するエッジ
 	void RemoveEdge(FSMGraphEdge* pEdge);
-	/// @brief ディシジョンを削除する
-	/// @param pDecision 削除するディシジョン
+	/// @brief 遷移条件を削除する
+	/// @param pDecision 削除する遷移条件
 	void RemoveDecision(FSMGraphDecision* pDecision);
 
 	/// @brief ノードリストを取得する
@@ -66,12 +66,12 @@ public:
 	/// @brief エッジリストを取得する
 	/// @return エッジリスト
 	const auto& GetEdges() const { return edges_; }
-	/// @brief ディシジョンリストを取得する
-	/// @return ディシジョンリスト
+	/// @brief 遷移条件リストを取得する
+	/// @return 遷移条件リスト
 	const auto& GetDecisions() const { return decisions_; }
 
-	/// @brief ドラッグ中のディシジョンを設定する
-	/// @param pDecision ドラッグ中のディシジョン
+	/// @brief ドラッグ中の遷移条件を設定する
+	/// @param pDecision ドラッグ中の遷移条件
 	void SetDraggingDecision(FSMGraphDecision* pDecision);
 	/// @brief セットアップを取得する
 	/// @return セットアップ
@@ -99,7 +99,7 @@ private:
 	void onCursorClick();
 	/// @brief ノードをドラッグする
 	void dragNode();
-	/// @brief ディシジョンをドラッグする
+	/// @brief 遷移条件をドラッグする
 	void dragDecision();
 	/// @brief ノードを選択する
 	/// @return 選択された場合はtrue、そうでない場合はfalse
@@ -107,16 +107,16 @@ private:
 	/// @brief エッジを選択する
 	/// @return 選択された場合はtrue、そうでない場合はfalse
 	bool selectEdge();
-	/// @brief ディシジョンを選択する
+	/// @brief 遷移条件を選択する
 	/// @return 選択された場合はtrue、そうでない場合はfalse
 	bool selectDecision();
 	/// @brief 選択されたノードを削除する
 	void removeSelectedNode();
 	/// @brief 選択されたエッジを削除する
 	void removeSelectedEdge();
-	/// @brief 選択されたディシジョンを削除する
+	/// @brief 選択された遷移条件を削除する
 	void removeSelectedDecision();
-	/// @brief エッジにディシジョンをアタッチする
+	/// @brief エッジに遷移条件をアタッチする
 	void attachDecisionToEdge();
 	/// @brief グラフをコンパイルしてデバッグを開始する
 	void compileGraphAndStartDebug();
@@ -168,6 +168,7 @@ private:
 	String fsmgFileName_ = U"";
 	TextEditState filePathTe_;
 	//DEBUGエリア用
+	bool isDebugging_ = false;
 	double deltaTime = 0;
 	uint64 millisecTime = 0;
 	ActorManager* pManager = ActorManager::Get();

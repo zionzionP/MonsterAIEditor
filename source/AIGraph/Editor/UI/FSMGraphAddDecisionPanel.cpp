@@ -2,6 +2,7 @@
 
 #include "AIGraph/Editor/FSMGraph.h"
 #include "AIGraph/Editor/Decision/FSMGraphActionDoneDecision.h"
+#include "AIGraph/Editor/Decision/FSMGraphDistanceAndObstacleDecision.h"
 #include "AIGraph/Editor/Decision/FSMGraphDistanceDecision.h"
 
 void FSMGraphAddDecisionPanel::AddDecision()
@@ -30,6 +31,14 @@ void FSMGraphAddDecisionPanel::AddDecision()
 					pOwnerGraph_->SetDraggingDecision(spDecision.get());
 				}
 				break;
+				case DecisionType::FSMGraphDistanceAndObstacleDecision:
+				{
+					auto spDecision = std::make_shared<FSMGraphDistanceAndObstacleDecision>();
+					spDecision.get()->SetPosition({ Cursor::PosF() });
+					pOwnerGraph_->AddDecision(spDecision);
+					pOwnerGraph_->SetDraggingDecision(spDecision.get());
+				}
+				break;
 				default:
 					break;
 				}
@@ -52,4 +61,7 @@ void FSMGraphAddDecisionPanel::DrawAddDecisionButton()
 	font(U"プレイヤーとの距離").draw(20, addDecisionButtons_[0].tl(), Palette::Black);
 	addDecisionButtons_[1].draw(Palette::White);
 	font(U"現在の行動が完了").draw(20, addDecisionButtons_[1].tl(), Palette::Black);
+	addDecisionButtons_[2].draw(Palette::White);
+	font(U"プレイヤーとの距離").draw(20, addDecisionButtons_[2].tl(), Palette::Black);
+	font(U"&障害物なし").draw(20, addDecisionButtons_[2].tl() + Vec2{0,20}, Palette::Black);
 }

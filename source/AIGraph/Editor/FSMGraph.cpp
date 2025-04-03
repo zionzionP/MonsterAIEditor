@@ -1,10 +1,10 @@
 ﻿#include "AIGraph/Editor/FSMGraph.h"
 
 #include "Effect/CursorEffect.h"
-#include "FSMCompiler.h"
+#include "AIGraph/Editor/FSMCompiler.h"
 #include "AIGraph/Editor/Node/Action/FSMGraphAttackActionNode.h"
 #include "AIGraph/Editor/Decision/FSMGraphDistanceDecision.h"
-#include "FSMGraphSaveLoad.h"
+#include "AIGraph/Editor/FSMGraphSaveLoad.h"
 #include "AIGraph/Editor/Node/Action/FSMGraphWaitActionNode.h"
 #include <filesystem>
 
@@ -493,7 +493,7 @@ void FSMGraph::removeSelectedNode()
 {
 	if (pSelectedNode_)
 	{
-		if (KeyDelete.down())
+		if (KeyDelete.down() && !isDebugging_)
 		{
 			RemoveNode(pSelectedNode_);
 			pSelectedNode_ = nullptr;
@@ -505,7 +505,7 @@ void FSMGraph::removeSelectedEdge()
 {
 	if (pSelectedEdge_ && !pSelectedDecision_)
 	{
-		if (KeyDelete.down())
+		if (KeyDelete.down() &&!isDebugging_)
 		{
 			RemoveEdge(pSelectedEdge_);
 			pSelectedEdge_ = nullptr;
@@ -517,7 +517,7 @@ void FSMGraph::removeSelectedDecision()
 {
 	if (pSelectedDecision_)
 	{
-		if (KeyDelete.down())
+		if (KeyDelete.down() && !isDebugging_)
 		{
 			RemoveDecision(pSelectedDecision_);
 			pSelectedDecision_ = nullptr;
@@ -537,7 +537,7 @@ void FSMGraph::saveFSMGraph()
 	}*/
 	if (SimpleGUI::Button(U"Save", Vec2{ 1510, 60 }))
 	{
-		if (fsmgFilePath_.has_value())
+		if (!filePathTe_.text.empty())
 		{
 			String saveFileName = filePathTe_.text;
 			String saveFilePath = U"FSMGraph/" + saveFileName;
@@ -569,10 +569,12 @@ void FSMGraph::selectAndLoadFSMGraphFile()
 			FSMGraphSaveLoad::Get()->LoadGraph(this, fsmgFilePath_.value().narrow());
 		}
 	}
-	if (!fsmgFileName_.empty())
+	SimpleGUI::TextBox(filePathTe_, Vec2{ 1210, 60 }, 200);
+
+	/*if (!fsmgFileName_.empty())
 	{
 		SimpleGUI::TextBox(filePathTe_, Vec2{ 1210, 60 }, 200);		
-	}
+	}*/
 }
 
 void FSMGraph::compileGraphAndStartDebug()
@@ -582,9 +584,14 @@ void FSMGraph::compileGraphAndStartDebug()
 		if (nodes_.size() != 0 && pCurrentEnemy_)
 		{
 			pCompiledController_ = FSMCompiler::Get()->CompileFromGraph(this);
+			if (pCompiledController_ == nullptr)
+			{
+				System::MessageBoxOK(U"コンパイル失敗");
+				return;
+			}
 			setup.SetupAI(pCurrentEnemy_, pCompiledController_);
 			setup.StartDebug(pCurrentEnemy_);
-
+			isDebugging_ = true;
 		}
 		else if (nodes_.size() == 0)
 		{
@@ -604,6 +611,7 @@ void FSMGraph::stopDebug()
 		setup.StopDebug();
 		pCompiledController_ = nullptr;
 		pCurrentEnemy_ = nullptr;
+		isDebugging_ = false;
 	}
 }
 

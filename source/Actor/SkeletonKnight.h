@@ -34,8 +34,9 @@ protected:
 	virtual void addAttackEffect() { effect_.add<AttackEffectSkeleton>(pAttackActor_, movement_.effectDirection); }
 	//攻撃用Actor
 	Attack* pAttackActor_ = DBG_NEW Attack;
-	//エフェクト発生装置
-	//Effect effect_;
+	//攻撃前の待ち時間
+	double preAttackTime_ = 0.3;
+	double preAttackTimer_ = 0.0;
 	double ATKTimer = 0.0;
 	Texture auraTexture{ U"Assets/pipo-btleffect014.png" };
 	//形態変換フラグ
